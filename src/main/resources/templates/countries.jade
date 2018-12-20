@@ -1,0 +1,16 @@
+extends partials/layout
+
+block content
+    h1 Countries
+    table.table
+        thead
+            th Code
+            th Name
+            th
+        tbody
+            for country in countries
+                tr
+                    td #{country.code}
+                    td #{country.name}
+                    td
+                        button.btn.btn-warning.btn-sm Edit

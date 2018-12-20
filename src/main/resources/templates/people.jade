@@ -1,0 +1,35 @@
+extends partials/layout
+
+block content
+    h1 People
+    table.table
+        thead
+            th ID
+            th Email
+            th Personal Code
+            th Personal Code Country
+            th Password
+            th First Name
+            th Last Name
+            th Living Place
+            th Date of Birth
+            th Time of Registration
+            th State
+            th
+        tbody
+            for person in people
+                tr
+                    td #{person.id}
+                    td #{person.email}
+                    td #{person.personalCode}
+                    td #{person.personalCodeCountry.name}
+                    td #{person.password}
+                    td #{person.firstName}
+                    td #{person.lastName}
+                    td #{person.livingPlace}
+                    td #{person.dateOfBirth}
+                    td #{person.timeOfRegistration}
+                    td #{person.personState.name}
+                    td #{country.name}
+                    td
+                        button.btn.btn-warning.btn-sm Edit

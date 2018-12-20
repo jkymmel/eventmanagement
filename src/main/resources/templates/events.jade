@@ -1,0 +1,36 @@
+extends ./partials/layout
+
+block content
+    h1 Events
+    table.table
+        thead
+            th ID
+            th Name
+            th Location
+            th Time
+            th Description
+            th Tickets
+            th Categories
+            th State
+            th Created At
+            th CreatedBy
+            th
+        tbody
+            for event in events
+                tr
+                    td #{event.id}
+                    td #{event.name}
+                    td #{event.location.name}
+                    td #{timestampFormatter.format(event.startTime)} - #{timestampFormatter.format(event.startTime)}
+                    td #{event.description}
+                    td #{event.ticketsAvailable}
+                    td
+                        for category in event.categories
+                            +category(category)
+                    td #{event.state.name}
+                    td #{timestampFormatter.format(event.createdAt)}
+                    td
+                        +inlinePerson(event.createdBy)
+                    td
+                        a.text-info(href="events/" + event.id): ion-icon(name="ios-eye", size="large")
+                        a.text-warning(href="#"): ion-icon(name="ios-create", size="large")

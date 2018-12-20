@@ -1,0 +1,31 @@
+extends ./partials/layout
+
+block content
+    +message(message)
+    h1 #{event.name}
+        small.text-muted  ##{event.id}
+    p
+        strong Location:
+        |  #{event.location.name} (#{event.location.address})
+    p
+        strong Time:
+        |  #{timestampFormatter.format(event.startTime)} - #{timestampFormatter.format(event.startTime)}
+    p
+        strong Description:
+        |  #{event.description}
+    p
+        strong Tickets available:
+        |  #{event.ticketsAvailable}
+    p
+        strong State:
+        |  #{event.state.name}
+    p
+        strong Categories:
+        for category in event.categories
+            +category(category)
+    p
+        strong Created at:
+        |  #{timestampFormatter.format(event.createdAt)}
+    p
+        strong Created by:&nbsp;
+        +inlinePerson(event.createdBy)

@@ -1,0 +1,16 @@
+include ../mixins/inlinePerson
+include ../mixins/categoryBadge
+include ../mixins/message
+doctype html
+html
+    head
+        title Event Management
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js")
+        script(src="//unpkg.com/ionicons@4.5.0/dist/ionicons.js")
+        link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.css")
+        link(rel="stylesheet", href="//bootswatch.com/4/flatly/bootstrap.min.css")
+    body
+        include navbar
+        .main-container.container
+            block content

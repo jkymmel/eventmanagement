@@ -1,0 +1,37 @@
+extends ./partials/layout
+
+block content
+    +message(message)
+    form(method="POST", action="/events")
+        .form-group
+            label.control-label Name
+            input.form-control.form-control-lg(value=event.name, name="name")
+        .form-group
+            label.control-label Location
+            select.form-control.form-control-lg
+                for location in locations
+                    option(value=location.id) #{location.name}
+        p
+            strong Time:
+            |  #{timestampFormatter.format(event.startTime)} - #{timestampFormatter.format(event.startTime)}
+        p
+            strong Description:
+            |  #{event.description}
+        p
+            strong Tickets available:
+            |  #{event.ticketsAvailable}
+        p
+            strong State:
+            |  #{event.state.name}
+        p
+            strong Categories:
+            for category in event.categories
+                +category(category)
+        p
+            strong Created at:
+            |  #{timestampFormatter.format(event.createdAt)}
+        p
+            strong Created by:&nbsp;
+            +inlinePerson(event.createdBy)
+        .form-group
+            button(type="submit").btn.btn-success Save

@@ -1,0 +1,7 @@
+mixin message(message)
+    if message
+        .alert.alert-dismissible(class=message.type.alertType)
+            button.close(type="button", data-dismiss="alert") &times;
+            strong #{message.title}
+            |  #{message.text}
+            |  #{message}

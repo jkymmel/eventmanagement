@@ -1,0 +1,10 @@
+/target/
+.mvn
+!.mvn/wrapper/maven-wrapper.jar
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+src/main/resources/application.properties
+src/main/resources/rebel.xml
