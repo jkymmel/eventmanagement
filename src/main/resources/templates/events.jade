@@ -25,12 +25,13 @@ block content
                     td #{event.description}
                     td #{event.ticketsAvailable}
                     td
-                        for category in event.categories
-                            +category(category)
+                        if event.categories
+                            for category in event.categories
+                                +category(category)
                     td #{event.state.name}
                     td #{timestampFormatter.format(event.createdAt)}
                     td
                         +inlinePerson(event.createdBy)
                     td
                         a.text-info(href="events/" + event.id): ion-icon(name="ios-eye", size="large")
-                        a.text-warning(href="#"): ion-icon(name="ios-create", size="large")
+                        a.text-warning(href="events/" + event.id + "/edit"): ion-icon(name="ios-create", size="large")

@@ -2,18 +2,21 @@ extends ./partials/layout
 
 block content
     +message(message)
-    form(method="POST", action="/events")
+    form(method="POST", action="/events/" + event.id)
         .form-group
             label.control-label Name
             input.form-control.form-control-lg(value=event.name, name="name")
         .form-group
             label.control-label Location
-            select.form-control.form-control-lg
+            select.form-control.form-control-lg(name="location.id")
                 for location in locations
-                    option(value=location.id) #{location.name}
+                    option(selected=(location.id.equals(event.location.id) ? 'selected' : ''), value=location.id)
+                        #{location.name}
         p
             strong Time:
-            |  #{timestampFormatter.format(event.startTime)} - #{timestampFormatter.format(event.startTime)}
+            input.form-control.datetime(value=timestampFormatter.format(event.startTime), name="startDate")
+            | -&nbsp;
+            //input.form-control.datetime(value=event.startDate, name="startDate")
         p
             strong Description:
             |  #{event.description}
@@ -25,8 +28,9 @@ block content
             |  #{event.state.name}
         p
             strong Categories:
-            for category in event.categories
-                +category(category)
+            if event.categories
+                for category in event.categories
+                    +category(category)
         p
             strong Created at:
             |  #{timestampFormatter.format(event.createdAt)}

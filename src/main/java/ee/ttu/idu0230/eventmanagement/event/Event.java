@@ -6,9 +6,11 @@ import ee.ttu.idu0230.eventmanagement.event.state.EventState;
 import ee.ttu.idu0230.eventmanagement.location.Location;
 import ee.ttu.idu0230.eventmanagement.person.Person;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +19,8 @@ import java.util.Set;
 @Table(name = "yritus")
 public class Event {
     @Id
-    @Column(name = "yritus_id")
+    @Column(name = "yritus_kood")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "nimi")
@@ -28,9 +31,10 @@ public class Event {
     private Location location;
 
     @Column(name = "algus_aeg")
-    private LocalDateTime startTime;
+    private OffsetDateTime startTime;
 
-    // TODO: add endTime
+    @Column(name = "lopp_aeg")
+    private OffsetDateTime endTime;
 
     @Column(name = "kirjeldus")
     private String description;
@@ -52,7 +56,7 @@ public class Event {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "yrituse_kategooria_omamine",
-            joinColumns = { @JoinColumn(name = "yritus_id") },
+            joinColumns = { @JoinColumn(name = "yritus_kood") },
             inverseJoinColumns = { @JoinColumn(name = "yrituse_kategooria_kood")}
     )
     private Set<EventCategory> categories = new HashSet<>();

@@ -3,16 +3,15 @@ package ee.ttu.idu0230.eventmanagement.event;
 import ee.ttu.idu0230.eventmanagement.location.LocationService;
 import ee.ttu.idu0230.eventmanagement.util.Message;
 import ee.ttu.idu0230.eventmanagement.util.MessageType;
-import ee.ttu.idu0230.eventmanagement.util.TimeStampFormatter;
+import org.springframework.core.NestedRuntimeException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.Map;
 import java.util.Optional;
 
@@ -56,17 +55,19 @@ public class EventController {
 
     }
 
-    @PostMapping("events")
-    public String save(@RequestBody Event event, Map<String, Object> model) {
+    @PostMapping("events/{id}")
+    public String save(@PathVariable Integer id, @Valid @ModelAttribute Event event, Map<String, Object> model) {
         try {
+            event.setId(id);
             Event saved = eventService.save(event);
             model.put("event", saved);
             model.put("message", new Message(MessageType.SUCCESS, "Success!", "Event saved!"));
             return "event";
-        } catch (Exception e) {
-            model.put("event", event);
-            model.put("message", new Message(MessageType.ERROR, "Error!", e.getMessage()));
-            return "event";
+        } catch (NestedRuntimeException e) {
+            model.put("event", eventService.get(id));
+            model.put("locations", locationService.findAll());
+            model.put("message", Message.ofError(e));
+            return "eventEdit";
         }
     }
 }

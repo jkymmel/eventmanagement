@@ -4,7 +4,7 @@ import com.github.instaweb.jade.autoconfigure.JadeProperties;
 import de.neuland.jade4j.Jade4J;
 import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.template.TemplateLoader;
-import ee.ttu.idu0230.eventmanagement.util.TimeStampFormatter;
+import ee.ttu.idu0230.eventmanagement.util.TimestampFormatter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,7 +35,7 @@ public class JadeAutoConfiguration {
         //configuration.setMode(mode);
 
         Map<String, Object> shared = new HashMap<>();
-        shared.put("timestampFormatter", new TimeStampFormatter());
+        shared.put("timestampFormatter", new TimestampFormatter());
         configuration.setSharedVariables(shared);
 
         return configuration;
