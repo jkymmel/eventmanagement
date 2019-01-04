@@ -77,6 +77,6 @@ public class EventDetailsRepository {
         String statement = "SELECT f_lopeta_yritus(?)";
         PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(statement);
         preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        preparedStatement.executeQuery();
     }
 }

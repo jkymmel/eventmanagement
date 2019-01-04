@@ -27,6 +27,6 @@ public class EventDetailsController {
     @PostMapping("{id}/end")
     public String endEventById(@PathVariable Integer id, Map<String, Object> model) {
         eventDetailsService.endEventById(id);
-        return "redirect:/events/" + id;
+        return "redirect:/activeInactive";
     }
 }

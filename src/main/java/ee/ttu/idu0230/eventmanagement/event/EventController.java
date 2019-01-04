@@ -23,6 +23,6 @@ public class EventController {
     @GetMapping("activeInactive")
     public String getActiveOrInactive(Map<String, Object> model) {
         model.put("events", eventService.getActiveorInactive());
-        return "events";
+        return "activeInactiveEvents";
     }
 }

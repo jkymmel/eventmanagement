@@ -1,0 +1,24 @@
+extends ./partials/layout
+
+block content
+    h1 Active/Inactive
+    table.table
+        thead
+            th ID
+            th Name
+            th Start time
+            th Location
+            th State
+            th
+        tbody
+            for event in events
+                tr
+                    td #{event.id}
+                    td #{event.name}
+                    td #{timestampFormatter.format(event.startTime)}
+                    td #{event.location}
+                    td #{event.state}
+                    td
+                        a.btn.btn-info.btn-sm(href="events/" + event.id) Details
+                        form(action="/events/" + event.id + "/end", method="POST")
+                            button(type="submit").btn.btn-danger.btn-sm End
