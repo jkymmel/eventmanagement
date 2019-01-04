@@ -1,12 +1,11 @@
 extends ./partials/layout
 
 block content
-    +message(message)
     h1 #{event.name}
         small.text-muted  ##{event.id}
     p
         strong Location:
-        |  #{event.location.name} (#{event.location.address})
+        |  #{event.location} (#{event.address})
     p
         strong Time:
         |  #{timestampFormatter.format(event.startTime)} - #{timestampFormatter.format(event.startTime)}
@@ -17,9 +16,6 @@ block content
         strong Tickets available:
         |  #{event.ticketsAvailable}
     p
-        strong State:
-        |  #{event.state.name}
-    p
         strong Categories:
         for category in event.categories
             +category(category)
@@ -27,5 +23,7 @@ block content
         strong Created at:
         |  #{timestampFormatter.format(event.createdAt)}
     p
-        strong Created by:&nbsp;
-        +inlinePerson(event.createdBy)
+        strong Created by:
+        |  #{event.createdBy}
+    form(action="/events/" + event.id + "/end", method="POST")
+        button(type="submit").btn.btn-danger End

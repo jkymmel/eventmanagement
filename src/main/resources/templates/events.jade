@@ -6,32 +6,16 @@ block content
         thead
             th ID
             th Name
+            th Start time
             th Location
-            th Time
-            th Description
-            th Tickets
-            th Categories
             th State
-            th Created At
-            th CreatedBy
             th
         tbody
             for event in events
                 tr
                     td #{event.id}
                     td #{event.name}
-                    td #{event.location.name}
-                    td #{timestampFormatter.format(event.startTime)} - #{timestampFormatter.format(event.startTime)}
-                    td #{event.description}
-                    td #{event.ticketsAvailable}
-                    td
-                        if event.categories
-                            for category in event.categories
-                                +category(category)
-                    td #{event.state.name}
-                    td #{timestampFormatter.format(event.createdAt)}
-                    td
-                        +inlinePerson(event.createdBy)
-                    td
-                        a.text-info(href="events/" + event.id): ion-icon(name="ios-eye", size="large")
-                        a.text-warning(href="events/" + event.id + "/edit"): ion-icon(name="ios-create", size="large")
+                    td #{timestampFormatter.format(event.startTime)}
+                    td #{event.location}
+                    td #{event.state}
+                    td: a.btn.btn-info.btn-sm(href="events/" + event.id) Details

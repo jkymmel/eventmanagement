@@ -1,0 +1,15 @@
+extends ./partials/layout
+
+block content
+    h1 Report
+    table.table
+        thead
+            th State Code
+            th State Name
+            th Count
+        tbody
+            for row in report
+                tr
+                    td #{row.stateCode}
+                    td #{row.stateName}
+                    td #{row.count}
